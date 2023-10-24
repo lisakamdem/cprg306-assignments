@@ -12,11 +12,9 @@ export default function ItemList({items}) {
         return itemsSort.slice().sort((a,b) => a[sortBy].localeCompare(b[sortBy]));
     };
 
-    
 
     const handleName = () => {
-        setSortBy("name");
-        
+        setSortBy("name");    
     };
 
     const handleCategory = () => {
