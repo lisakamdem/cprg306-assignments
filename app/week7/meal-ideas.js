@@ -15,8 +15,16 @@ export default function MealIdea({ingredient}){
 
     async function loadMeals() {
         try{
+            if (ingredient === "") {
+                setMealIdea([]);
+                return;
+            }
             const data = await fetchMealIdea(ingredient);
-            setMealIdea(data);
+            if (data !== null) {
+                setMealIdea(data);
+            } else {
+                setMealIdea([]);
+            }
         } catch (error) {
             console.log(error);
         }

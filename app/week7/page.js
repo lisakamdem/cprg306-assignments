@@ -25,7 +25,7 @@ export default function Page() {
   return (
     <main className="flex">
     <div className="w-1/2">
-      <h1 className="text-3xl font-bold m-2 text-purple-500">Shopping List</h1>
+      <h1 className="text-3xl font-bold m-2 text-purple-500 text-center">Shopping List</h1>
       <NewItem onAddItem={handleAddItem} />
         <ItemList items={items} onItemSelect={handleItemSelect}/>
     </div>
