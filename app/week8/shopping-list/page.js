@@ -4,21 +4,14 @@ import ItemList from "./item-list";
 import itemsData from "./items.json";
 import NewItem from "./new-items";
 import MealIdea from "./meal-ideas";
+import SignAndSignOut from "../page";
 import { useState } from "react";
-import { useUserAuth } from "./_utils/auth-context";
 
 
 export default function Page() {
 
-    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+    const {user} = SignAndSignOut();
 
-    function handleSignIn() {
-        gitHubSignIn();
-    }
-
-    function handleSignOut() {
-        firebaseSignOut();
-    }
 
     const [items, setItems] = useState(itemsData);
     const [selectItemName, setSelectItemName] = useState("");
@@ -33,20 +26,21 @@ export default function Page() {
         setSelectItemName(name);
     }
 
-  return (
-    <main className="flex">
-
-        <div>
-            <h1>Week 8 - shopping List</h1>
-            {!user && <button onClick={handleSignIn}>Sign In with GitHub</button>}
+    return (
+        
+        <main className="flex">
+            {!user && <p>Please sign in to use the shopping list</p>}
             {user && (
-                <div>
-                    <p> Welcome, {user.displayName} </p>
-                    <button onClick={handleSignOut}>Sign Out</button>
-                    <p><Link href= "/week7">Shopping List</Link></p>
-                </div>
-            )}
-        </div> 
-    </main>
-  );
+                <dix>
+                    <div className="w-1/2">
+                    <h1 className="text-3xl font-bold m-2 text-purple-500 text-center">Shopping List</h1>
+                        <NewItem onAddItem={handleAddItem} />
+                        <ItemList items={items} onItemSelect={handleItemSelect}/>
+                    </div>
+                    <div className="w-1/2">
+                        <MealIdea ingredient={selectItemName}/>
+                    </div>   
+                </dix> )}
+        </main>
+    );
 }
