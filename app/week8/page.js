@@ -15,14 +15,23 @@ const handleSignOut = async () => {
 }
  
 return (
+    
     <div>
-      <p>
-        Welcome, {user ? `${user.displayName} (${user.email})` : "Guest"}
-      </p>
-      <button onClick={handleSignIn}>Sign in with GitHub</button>
-      <button onClick={handleSignOut}>Log Out</button>
-     {user && <p><Link href= "/week8/shopping-list">Shopping List</Link></p>}
+        {!user ? 
+        (
+            <>
+                <p>
+                 Welcome to the Shopping List App.
+                </p>
+               <button  className="no-underline hover:underline"onClick={handleSignIn}>Sign in with GitHub</button>
 
+            </> 
+       ) : (
+        <>
+            <p>Welcome, {user.displayName ? `${user.displayName} (${user.email})` : user.email}</p>
+            <button className="no-underline hover:underline" onClick={handleSignOut}>Log Out</button>
+            <p className="no-underline hover:underline"><Link href= "/week8/shopping-list">Shopping List</Link></p>
+       </> )}
     </div>
   );
 }
