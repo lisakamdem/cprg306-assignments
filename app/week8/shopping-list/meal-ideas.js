@@ -16,14 +16,14 @@ export default function MealIdea({ingredient}){
     async function loadMeals() {
         try{
             if (ingredient === "") {
-                setMealIdea(['Please select an item from the list to get a meal idea.']);
+                setMealIdea([]);
                 return;
             }
             const data = await fetchMealIdea(ingredient);
             if (data !== null) {
                 setMealIdea(data);
             } else {
-                setMealIdea([`No meal idea found for ${ingredient}`]);
+                setMealIdea([]);
             }
         } catch (error) {
             console.log(error);
@@ -34,9 +34,27 @@ export default function MealIdea({ingredient}){
         loadMeals();
     }, [ingredient]);
 
+    const displayText = ingredient ? "" : "Select an ingredient to get meal ideas";
+
+    if (mealIdea.length === 0 && ingredient !== ""){
+        return (
+            <div>
+                <h2 className="text-2xl font-bold m-2 text-purple-500">Meal Idea for {ingredient}</h2>
+                <p>
+                    {displayText}No meal ideas found for {ingredient}
+                </p>
+            </div>
+        );  
+    }
+
+
+
     return (
         <div>
-            <h2 className="text-2xl font-bold m-2 text-purple-500">Meal Idea for {ingredient}</h2>
+            <h2 className="text-2xl font-bold text-purple-500">Meal Idea for {ingredient}</h2>
+            <p>
+                {displayText}
+            </p>
             <ul>
                 {mealIdea.map((meal) => (
                     <li key={meal.idMeal}>{meal.strMeal} </li>

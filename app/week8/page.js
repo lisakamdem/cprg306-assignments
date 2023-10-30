@@ -2,6 +2,7 @@
 
 import { useUserAuth } from "./_utils/auth-context";
 import Link from "next/link";
+import ShoppingList from "./shopping-list/page";
  
 export default function SignAndSignOut() {
 const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
@@ -31,6 +32,7 @@ return (
             <p>Welcome, {user.displayName ? `${user.displayName} (${user.email})` : user.email}</p>
             <button className="no-underline hover:underline" onClick={handleSignOut}>Log Out</button>
             <p className="no-underline hover:underline"><Link href= "/week8/shopping-list">Shopping List</Link></p>
+            {/*<ShoppingList />*/}
        </> )}
     </div>
   );
