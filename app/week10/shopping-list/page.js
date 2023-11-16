@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { useUserAuth } from "../_utils/auth-context";
 
 
-export default function Page({params}) {
+export default function Page() {
 
     const {user, gitHubSignIn ,firebaseSignOut} = useUserAuth();
 
@@ -19,15 +19,15 @@ export default function Page({params}) {
     const [selectItemName, setSelectItemName] = useState("");
 
     const loadItems = async () => {
-        const items = await getItems();
-        setItems(items);
+        if (user && user.uid) {
+            const userItems = await getItems(user.uid);
+            setItems(userItems);
+          }
     };
-
 
     useEffect(() => {
         loadItems();} 
-        ,[]
-    );
+        ,[user?.uid]);
 
     function handleAddItem(item) {
         if(user && user.uid) {
